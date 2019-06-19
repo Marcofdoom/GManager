@@ -26,9 +26,16 @@ public class Player {
 	@Column(name = "player_dkp")
 	private int playerDKP;
 
-//	@ManyToMany(fetch = FetchType.EAGER)
-//	private List<RaidAttendance> raidAttendances;
+	// @ManyToMany(fetch = FetchType.EAGER)
+	// private List<RaidAttendance> raidAttendances;
 
-//	@OneToMany(mappedBy = "player", fetch = FetchType.EAGER)
-//	private Set<Avatar> avatars;
+	// @OneToMany(mappedBy = "player", fetch = FetchType.EAGER)
+	// private Set<Avatar> avatars;
+
+	public Player(int playerId, String playerFirstName, String playerLastName, int playerDKP) {
+		this.playerId = playerId;
+		this.playerFirstName = playerFirstName;
+		this.playerLastName = playerLastName;
+		this.playerDKP = playerDKP;
+	}
 }

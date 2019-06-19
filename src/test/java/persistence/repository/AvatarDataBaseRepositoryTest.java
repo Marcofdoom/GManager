@@ -1,6 +1,9 @@
 package persistence.repository;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -15,6 +18,7 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import persistence.domain.Avatar;
+import util.ClassType;
 import util.Constants;
 import util.JSONUtil;
 
@@ -53,18 +57,12 @@ public class AvatarDataBaseRepositoryTest {
 		assertEquals(Constants.GET_AVATAR_FAIL_RESPONSE, avatarDataBaseRepository.getAvatar("Kilrathi"));
 	}
 
-	// @Test
-	// public void getAllAvatarsTest() {
-	//
-	// }
-	//
-	// @Test
-	// public void getAvatarTest() {
-	//
-	// }
-	//
-	// @Test
-	// public void addAvatarTest() {
-	//
-	// }
+	@Test
+	public void getAllAvatarsTest() {
+		Mockito.when(entityManager.createQuery(Mockito.anyString())).thenReturn(query);
+		List<Avatar> avatars = new ArrayList<Avatar>();
+		avatars.add(new Avatar("Kilrathi", ClassType.druid, 100));
+		Mockito.when(query.getResultList()).thenReturn(avatars);
+		Assert.assertEquals(Constants.GET_ALL_AVATAR_QUERY, avatarDataBaseRepository.getAllAvatars());
+	}
 }

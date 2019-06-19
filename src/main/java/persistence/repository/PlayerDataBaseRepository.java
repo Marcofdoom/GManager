@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 
 import persistence.domain.Avatar;
 import persistence.domain.Player;
+import util.Constants;
 import util.JSONUtil;
 
 @Transactional(SUPPORTS)
@@ -32,7 +33,11 @@ public class PlayerDataBaseRepository implements PlayerRepository {
 
 	@Override
 	public String getPlayer(int playerId) {
-		return jsonUtil.getJSONForObject(entityManager.find(Player.class, playerId));
+		if (entityManager.find(Player.class, playerId) != null) {
+			return jsonUtil.getJSONForObject(entityManager.find(Player.class, playerId));
+		}
+
+		return Constants.GET_PLAYER_FAIL_RESPONSE;
 	}
 
 	@Override
@@ -66,5 +71,13 @@ public class PlayerDataBaseRepository implements PlayerRepository {
 	@Override
 	public String deletePlayer(int playerId) {
 		return null;
+	}
+
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
+
+	public void setJsonUtil(JSONUtil jsonUtil) {
+		this.jsonUtil = jsonUtil;
 	}
 }
