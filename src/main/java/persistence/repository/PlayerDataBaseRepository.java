@@ -32,12 +32,13 @@ public class PlayerDataBaseRepository implements PlayerRepository {
 
 	@Override
 	public String getPlayer(int playerId) {
-		return null;
+		return jsonUtil.getJSONForObject(entityManager.find(Player.class, playerId));
 	}
 
 	@Override
 	public String getAllPlayers() {
-		return null;
+		Query query = entityManager.createQuery("SELECT a FROM Player a");
+		return jsonUtil.getJSONForObject(query.getResultList());
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 // // Avatar constants
-// const getAllAvatarsConst = { method: "GET", url: "http://localhost:8080/guildmanagertwo/api/avatar/getAllAvatars" };
+const URL = '35.246.104.241:8888';
+
+const getAllAvatarsConst = { method: "GET", url: `http://${URL}/GManager/api/avatar/getAllAvatars` };
 // const getAvatarConst = { method: "GET", url: "http://localhost:8080/guildmanagertwo/api/avatar/getAvatar/" };
 // const removeAvatarConst = { method: "DELETE", url: "http://localhost:8080/guildmanagertwo/api/avatar/removeAvatar/" };
 // const updateAvatarConst = { method: "PUT", url: "http://localhost:8080/guildmanagertwo/api/avatar/updateAvatar/" };
@@ -24,25 +26,25 @@
 // }
 
 // // READ
-// function getAllAvatars() {
+function getAllAvatars() {
 
-//     let request = new XMLHttpRequest();
+    let request = new XMLHttpRequest();
 
-//     request.onload = function () {
-//         movieArray = JSON.parse(request.response);
-//         console.log(movieArray);
-//         buildTable(movieArray, "table_body");
-//     }
+    request.onload = function () {
+        movieArray = JSON.parse(request.response);
+        console.log(movieArray);
+        // buildTable(movieArray, "table_body");
+    }
 
-//     request.open(getAllAvatarsConst.method, getAllAvatarsConst.url);
-//     request.send();
+    request.open(getAllAvatarsConst.method, getAllAvatarsConst.url);
+    request.send();
 
-//     // makeRequest(getAllAvatarsConst.method, getAllAvatarsConst.url);
-// }
+    // makeRequest(getAllAvatarsConst.method, getAllAvatarsConst.url);
+}
 
-// function getAvatar() {
-//     makeRequest(getAvatarConst.method, getAvatarConst.url + document.getElementById('search_bar').value);
-// }
+function getAvatar() {
+    makeRequest(getAvatarConst.method, getAvatarConst.url + document.getElementById('search_bar').value);
+}
 
 // // UPDATE
 // function updateAvatar() {

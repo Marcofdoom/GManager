@@ -22,12 +22,12 @@ public class AvatarServiceImpl implements AvatarService {
 
 	@Override
 	public String getAvatar(String avatarName) {
-		return null;
+		return avatarRepository.getAvatar(avatarName);
 	}
 
 	@Override
 	public String getAllAvatars() {
-		return null;
+		return avatarRepository.getAllAvatars();
 	}
 
 	@Override

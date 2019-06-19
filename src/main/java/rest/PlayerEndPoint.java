@@ -28,14 +28,14 @@ public class PlayerEndPoint {
 	@GET
 	@Produces({ "application/json" })
 	public String getPlayer(@PathParam("playerId") int playerId) {
-		return null;
+		return playerService.getPlayer(playerId);
 	}
 
 	@Path("/getAllPlayers")
 	@GET
 	@Produces({ "application/json" })
 	public String getAllPlayers() {
-		return null;
+		return playerService.getAllPlayers();
 	}
 
 	public String getHighestListDKP() {

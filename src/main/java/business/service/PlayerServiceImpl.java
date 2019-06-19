@@ -16,12 +16,12 @@ public class PlayerServiceImpl implements PlayerService {
 
 	@Override
 	public String getPlayer(int playerId) {
-		return null;
+		return playerRepository.getPlayer(playerId);
 	}
 
 	@Override
 	public String getAllPlayers() {
-		return null;
+		return playerRepository.getAllPlayers();
 	}
 
 	@Override

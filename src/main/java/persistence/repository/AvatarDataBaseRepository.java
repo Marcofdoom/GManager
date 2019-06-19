@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 
 import persistence.domain.Avatar;
 import util.ClassType;
+import util.Constants;
 import util.JSONUtil;
 
 @Transactional(SUPPORTS)
@@ -38,12 +39,17 @@ public class AvatarDataBaseRepository implements AvatarRepository {
 
 	@Override
 	public String getAvatar(String avatarName) {
-		return null;
+		if (entityManager.find(Avatar.class, avatarName) != null) {
+			return jsonUtil.getJSONForObject(entityManager.find(Avatar.class, avatarName));
+		}
+
+		return Constants.GET_AVATAR_FAIL_RESPONSE;
 	}
 
 	@Override
 	public String getAllAvatars() {
-		return null;
+		Query query = entityManager.createQuery("SELECT a FROM Avatar a");
+		return jsonUtil.getJSONForObject(query.getResultList());
 	}
 
 	@Override
