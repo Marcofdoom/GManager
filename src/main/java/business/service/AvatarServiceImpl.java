@@ -17,7 +17,7 @@ public class AvatarServiceImpl implements AvatarService {
 
 	@Override
 	public String addAvatar(String jsonAvatarData) {
-		return null;
+		return avatarRepository.addAvatar(jsonAvatarData);
 	}
 
 	@Override

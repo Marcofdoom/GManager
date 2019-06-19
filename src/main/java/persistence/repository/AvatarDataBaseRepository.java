@@ -3,6 +3,8 @@ package persistence.repository;
 import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
 
+import java.util.List;
+
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -11,7 +13,6 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import persistence.domain.Avatar;
-import util.ClassType;
 import util.Constants;
 import util.JSONUtil;
 
@@ -34,7 +35,15 @@ public class AvatarDataBaseRepository implements AvatarRepository {
 	@Transactional(REQUIRED)
 	@Override
 	public String addAvatar(String jsonAvatarData) {
-		return null;
+		Avatar avatar = jsonUtil.getObjectForJSON(jsonAvatarData, Avatar.class);
+
+		if (entityManager.find(Avatar.class, avatar.getAvatarName()) != null) {
+			return Constants.ADD_AVATAR_ALREADY_EXISTS_RESPONSE;
+		}
+
+		entityManager.persist(avatar);
+
+		return Constants.ADD_AVATAR_PASS_RESPONSE;
 	}
 
 	@Override

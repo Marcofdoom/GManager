@@ -16,7 +16,7 @@ public class AvatarEndPoint {
 
 	@Inject
 	private AvatarService avatarService;
-	
+
 	@Path("/addAvatar/{playerId}")
 	@POST
 	@Produces({ "application/json" })
@@ -28,7 +28,7 @@ public class AvatarEndPoint {
 	@POST
 	@Produces({ "application/json" })
 	public String addAvatar(String jsonAvatarData) {
-		return null;
+		return avatarService.addAvatar(jsonAvatarData);
 	}
 
 	@Path("/getAvatar/{avatarName}")

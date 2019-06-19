@@ -32,6 +32,10 @@ public class Player {
 	// @OneToMany(mappedBy = "player", fetch = FetchType.EAGER)
 	// private Set<Avatar> avatars;
 
+	public Player() {
+
+	}
+
 	public Player(int playerId, String playerFirstName, String playerLastName, int playerDKP) {
 		this.playerId = playerId;
 		this.playerFirstName = playerFirstName;

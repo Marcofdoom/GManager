@@ -8,10 +8,10 @@ public class PlayerServiceImpl implements PlayerService {
 
 	@Inject
 	private PlayerRepository playerRepository;
-	
+
 	@Override
 	public String addPlayer(String jsonPlayerData) {
-		return null;
+		return playerRepository.addPlayer(jsonPlayerData);
 	}
 
 	@Override

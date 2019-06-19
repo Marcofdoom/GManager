@@ -65,4 +65,21 @@ public class AvatarDataBaseRepositoryTest {
 		Mockito.when(query.getResultList()).thenReturn(avatars);
 		Assert.assertEquals(Constants.GET_ALL_AVATAR_QUERY, avatarDataBaseRepository.getAllAvatars());
 	}
+
+	@Test
+	public void addAvatarAlreadyExistsTest() {
+		Mockito.when(entityManager.find(Avatar.class, "Kilrathi"))
+				.thenReturn(new Avatar("Kilrathi", ClassType.druid, 100));
+
+		assertEquals(Constants.ADD_AVATAR_ALREADY_EXISTS_RESPONSE,
+				avatarDataBaseRepository.addAvatar(Constants.SINGLE_AVATAR_JSON));
+	}
+
+	@Test
+	public void addAvatarDoesNotExist() {
+		Mockito.when(entityManager.find(Avatar.class, "Kilrathi")).thenReturn(null);
+
+		assertEquals(Constants.ADD_AVATAR_PASS_RESPONSE,
+				avatarDataBaseRepository.addAvatar(Constants.SINGLE_AVATAR_JSON));
+	}
 }
