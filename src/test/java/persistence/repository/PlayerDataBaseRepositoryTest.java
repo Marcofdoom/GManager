@@ -63,4 +63,10 @@ public class PlayerDataBaseRepositoryTest {
 		Mockito.when(query.getResultList()).thenReturn(players);
 		assertEquals(Constants.GET_ALL_PLAYER_QUERY, playerDataBaseRepository.getAllPlayers());
 	}
+
+	@Test
+	public void addPlayerTest() {
+		assertEquals(Constants.ADD_PLAYER_PASS_RESPONSE,
+				playerDataBaseRepository.addPlayer(Constants.SINGLE_PLAYER_JSON));
+	}
 }

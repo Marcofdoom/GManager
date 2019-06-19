@@ -21,7 +21,7 @@ public class PlayerEndPoint {
 	@POST
 	@Produces({ "application/json" })
 	public String addPlayer(String jsonPlayerData) {
-		return null;
+		return playerService.addPlayer(jsonPlayerData);
 	}
 
 	@Path("/getPlayer/{playerId}")

@@ -34,7 +34,11 @@ public class Avatar {
 	// public Avatar() {
 	//
 	// }
-	//
+
+	public Avatar() {
+
+	}
+
 	public Avatar(String avatarName, ClassType className, int avatarLevel) {
 		this.avatarName = avatarName;
 		this.className = className;

@@ -28,7 +28,10 @@ public class PlayerDataBaseRepository implements PlayerRepository {
 	@Transactional(REQUIRED)
 	@Override
 	public String addPlayer(String jsonPlayerInformation) {
-		return null;
+		Player player = jsonUtil.getObjectForJSON(jsonPlayerInformation, Player.class);
+		entityManager.persist(player);
+
+		return Constants.ADD_PLAYER_PASS_RESPONSE;
 	}
 
 	@Override
