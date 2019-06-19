@@ -57,7 +57,7 @@ public class AvatarEndPoint {
 	@PUT
 	@Produces({ "application/json" })
 	public String updateAvatar(@PathParam("avatarName") String avatarName, String jsonAvatarData) {
-		return null;
+		return avatarService.updateAvatar(avatarName, jsonAvatarData);
 	}
 
 	@Path("/deleteAvatar/{avatarName}")

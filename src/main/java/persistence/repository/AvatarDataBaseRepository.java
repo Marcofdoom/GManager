@@ -3,8 +3,6 @@ package persistence.repository;
 import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
 
-import java.util.List;
-
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -74,7 +72,17 @@ public class AvatarDataBaseRepository implements AvatarRepository {
 	@Transactional(REQUIRED)
 	@Override
 	public String updateAvatar(String avatarName, String jsonAvatarData) {
-		return null;
+		Avatar existingDetails = entityManager.find(Avatar.class, avatarName);
+
+		if (existingDetails == null) {
+			return Constants.UPDATE_AVATAR_DOES_NOT_EXIST_RESPONSE;
+		}
+
+		Avatar avatar = jsonUtil.getObjectForJSON(jsonAvatarData, Avatar.class);
+		existingDetails.setAvatarLevel(avatar.getAvatarLevel());
+		entityManager.persist(existingDetails);
+
+		return Constants.UPDATE_AVATAR_PASS_RESPONSE;
 	}
 
 	@Transactional(REQUIRED)
@@ -87,6 +95,7 @@ public class AvatarDataBaseRepository implements AvatarRepository {
 		}
 
 		entityManager.remove(avatar);
+
 		return Constants.REMOVE_AVATAR_PASS_RESPONSE;
 	}
 

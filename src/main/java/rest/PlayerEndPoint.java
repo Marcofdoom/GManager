@@ -54,7 +54,7 @@ public class PlayerEndPoint {
 	@PUT
 	@Produces({ "application/json" })
 	public String updatePlayer(@PathParam("playerId") int playerId, String jsonPlayerData) {
-		return null;
+		return playerService.updatePlayer(playerId, jsonPlayerData);
 	}
 
 	@Path("/deletePlayer/{playerId}")

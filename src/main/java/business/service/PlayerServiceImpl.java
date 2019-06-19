@@ -41,7 +41,7 @@ public class PlayerServiceImpl implements PlayerService {
 
 	@Override
 	public String updatePlayer(int playerId, String jsonPlayerData) {
-		return null;
+		return playerRepository.updatePlayer(playerId, jsonPlayerData);
 	}
 
 	@Override

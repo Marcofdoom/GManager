@@ -3,7 +3,6 @@ package business.service;
 import javax.inject.Inject;
 
 import persistence.repository.AvatarRepository;
-import util.JSONUtil;
 
 public class AvatarServiceImpl implements AvatarService {
 
@@ -42,7 +41,7 @@ public class AvatarServiceImpl implements AvatarService {
 
 	@Override
 	public String updateAvatar(String avatarName, String jsonAvatarData) {
-		return null;
+		return avatarRepository.updateAvatar(avatarName, jsonAvatarData);
 	}
 
 	@Override

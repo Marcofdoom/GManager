@@ -1,5 +1,5 @@
 package util;
 
 public enum ClassType {
-	warrior, druid, shaman, hunter, paladin, priest, mage, warlock, rogue;
+	WARRIOR, DRUID, SHAMAN, HUNTER, PALADIN, PRIEST, MAGE, WARLOCK, ROGUE;
 }
