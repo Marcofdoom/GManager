@@ -47,6 +47,6 @@ public class AvatarServiceImpl implements AvatarService {
 
 	@Override
 	public String deleteAvatar(String avatarName) {
-		return null;
+		return avatarRepository.deleteAvatar(avatarName);
 	}
 }

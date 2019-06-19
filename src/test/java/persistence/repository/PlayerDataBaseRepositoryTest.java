@@ -16,7 +16,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import persistence.domain.Avatar;
 import persistence.domain.Player;
+import util.ClassType;
 import util.Constants;
 import util.JSONUtil;
 
@@ -68,5 +70,17 @@ public class PlayerDataBaseRepositoryTest {
 	public void addPlayerTest() {
 		assertEquals(Constants.ADD_PLAYER_PASS_RESPONSE,
 				playerDataBaseRepository.addPlayer(Constants.SINGLE_PLAYER_JSON));
+	}
+
+	@Test
+	public void deletePlayerDoesNotExistTest() {
+		Mockito.when(entityManager.find(Player.class, 10)).thenReturn(null);
+		assertEquals(Constants.REMOVE_PLAYER_DOES_NOT_EXIST_RESPONSE, playerDataBaseRepository.deletePlayer(10));
+	}
+
+	@Test
+	public void deletePlayerDoesExistTest() {
+		Mockito.when(entityManager.find(Player.class, 10)).thenReturn(new Player(10, "Marc", "Partington", 0));
+		assertEquals(Constants.REMOVE_PLAYER_PASS_RESPONSE, playerDataBaseRepository.deletePlayer(10));
 	}
 }

@@ -73,7 +73,14 @@ public class PlayerDataBaseRepository implements PlayerRepository {
 	@Transactional(REQUIRED)
 	@Override
 	public String deletePlayer(int playerId) {
-		return null;
+		Player player = entityManager.find(Player.class, playerId);
+
+		if (player == null) {
+			return Constants.REMOVE_PLAYER_DOES_NOT_EXIST_RESPONSE;
+		}
+
+		entityManager.remove(player);
+		return Constants.REMOVE_PLAYER_PASS_RESPONSE;
 	}
 
 	public void setEntityManager(EntityManager entityManager) {
