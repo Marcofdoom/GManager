@@ -1,5 +1,6 @@
 // // Avatar constants
-const URL = '35.246.104.241:8888';
+// const URL = '35.246.104.241:8888';
+const URL = 'localhost:8080';
 
 const getAllAvatarsConst = { method: "GET", url: `http://${URL}/GManager/api/avatar/getAllAvatars` };
 // const getAvatarConst = { method: "GET", url: "http://localhost:8080/guildmanagertwo/api/avatar/getAvatar/" };
@@ -124,28 +125,28 @@ function getAvatar() {
 //     request.send(body);
 // }
 
-// function buildTable(movieArray, tableId) {
+function buildTable(array, tableId) {
 
-//     removeChildren(tableId);
-//     let parent = document.getElementById(tableId);
+    removeChildren(tableId);
+    let parent = document.getElementById(tableId);
 
-//     movieArray.forEach(element => {
-//         let row = document.createElement('tr');
-//         parent.appendChild(row);
+    array.forEach(element => {
+        let row = document.createElement('tr');
+        parent.appendChild(row);
 
-//         let cell1 = document.createElement('td');
-//         cell1.innerText = element.avatarName;
-//         row.appendChild(cell1);
+        let cell1 = document.createElement('td');
+        cell1.innerText = element.avatarName;
+        row.appendChild(cell1);
 
-//         let cell2 = document.createElement('td');
-//         cell2.innerText = element.className;
-//         row.appendChild(cell2);
+        let cell2 = document.createElement('td');
+        cell2.innerText = element.className;
+        row.appendChild(cell2);
 
-//         let cell3 = document.createElement('td');
-//         cell3.innerText = element.avatarLevel;
-//         row.appendChild(cell3);
-//     });
-// }
+        let cell3 = document.createElement('td');
+        cell3.innerText = element.avatarLevel;
+        row.appendChild(cell3);
+    });
+}
 
 // function populateDescription() {
 //     const x = event.target.id;
