@@ -35,14 +35,14 @@ public class AvatarEndPoint {
 	@GET
 	@Produces({ "application/json" })
 	public String getAvatar(@PathParam("avatarName") String avatarName) {
-		return null;
+		return avatarService.getAvatar(avatarName);
 	}
 
 	@Path("/getAllAvatars")
 	@GET
 	@Produces({ "application/json" })
 	public String getAllAvatars() {
-		return null;
+		return avatarService.getAllAvatars();
 	}
 
 	public String getAvatarCount() {
