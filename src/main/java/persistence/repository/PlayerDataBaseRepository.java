@@ -10,7 +10,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
-import persistence.domain.Avatar;
 import persistence.domain.Player;
 import util.Constants;
 import util.JSONUtil;
@@ -67,7 +66,19 @@ public class PlayerDataBaseRepository implements PlayerRepository {
 	@Transactional(REQUIRED)
 	@Override
 	public String updatePlayer(int playerId, String newDetails) {
-		return null;
+		Player existingDetails = entityManager.find(Player.class, playerId);
+
+		if (existingDetails == null) {
+			return Constants.UPDATE_PLAYER_DOES_NOT_EXIST_RESPONSE;
+		}
+
+		Player player = jsonUtil.getObjectForJSON(newDetails, Player.class);
+		existingDetails.setPlayerDKP(player.getPlayerDKP());
+		existingDetails.setPlayerFirstName(player.getPlayerFirstName());
+		existingDetails.setPlayerLastName(player.getPlayerLastName());
+
+		entityManager.persist(existingDetails);
+		return Constants.UPDATE_PLAYER_PASS_RESPONSE;
 	}
 
 	@Transactional(REQUIRED)

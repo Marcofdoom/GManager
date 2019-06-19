@@ -61,7 +61,7 @@ public class AvatarDataBaseRepositoryTest {
 	public void getAllAvatarsTest() {
 		Mockito.when(entityManager.createQuery(Mockito.anyString())).thenReturn(query);
 		List<Avatar> avatars = new ArrayList<Avatar>();
-		avatars.add(new Avatar("Kilrathi", ClassType.druid, 100));
+		avatars.add(new Avatar("Kilrathi", ClassType.DRUID, 100));
 		Mockito.when(query.getResultList()).thenReturn(avatars);
 		Assert.assertEquals(Constants.GET_ALL_AVATAR_QUERY, avatarDataBaseRepository.getAllAvatars());
 	}
@@ -69,7 +69,7 @@ public class AvatarDataBaseRepositoryTest {
 	@Test
 	public void addAvatarAlreadyExistsTest() {
 		Mockito.when(entityManager.find(Avatar.class, "Kilrathi"))
-				.thenReturn(new Avatar("Kilrathi", ClassType.druid, 100));
+				.thenReturn(new Avatar("Kilrathi", ClassType.DRUID, 100));
 
 		assertEquals(Constants.ADD_AVATAR_ALREADY_EXISTS_RESPONSE,
 				avatarDataBaseRepository.addAvatar(Constants.SINGLE_AVATAR_JSON));
@@ -93,7 +93,24 @@ public class AvatarDataBaseRepositoryTest {
 	@Test
 	public void deleteAvatarDoesExistTest() {
 		Mockito.when(entityManager.find(Avatar.class, "Kilrathi"))
-				.thenReturn(new Avatar("Kilrathi", ClassType.druid, 100));
+				.thenReturn(new Avatar("Kilrathi", ClassType.DRUID, 100));
 		assertEquals(Constants.REMOVE_AVATAR_PASS_RESPONSE, avatarDataBaseRepository.deleteAvatar("Kilrathi"));
+	}
+
+	@Test
+	public void updateAvatarDoesExistTest() {
+		Mockito.when(entityManager.find(Avatar.class, "Kilrathi"))
+				.thenReturn(new Avatar("Kilrathi", ClassType.DRUID, 100));
+
+		assertEquals(Constants.UPDATE_AVATAR_PASS_RESPONSE,
+				avatarDataBaseRepository.updateAvatar("Kilrathi", Constants.SINGLE_AVATAR_UPDATE_JSON));
+	}
+
+	@Test
+	public void updateAvatarDoesNotExistTest() {
+		Mockito.when(entityManager.find(Avatar.class, "Steve")).thenReturn(new Avatar("Steve", ClassType.DRUID, 100));
+
+		assertEquals(Constants.UPDATE_AVATAR_DOES_NOT_EXIST_RESPONSE,
+				avatarDataBaseRepository.updateAvatar("Kilrathi", Constants.SINGLE_AVATAR_UPDATE_JSON));
 	}
 }
