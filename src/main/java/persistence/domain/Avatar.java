@@ -27,18 +27,17 @@ public class Avatar {
 	@Column(name = "avatar_level")
 	private int avatarLevel;
 
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name = "player", nullable = false)
-//	private Player player;
+	// @ManyToOne(fetch = FetchType.EAGER)
+	// @JoinColumn(name = "player", nullable = false)
+	// private Player player;
 
-//	public Avatar() {
-//
-//	}
-//
-//	public Avatar(String avatarName, ClassType className, int avatarLevel, Player player) {
-//		this.avatarName = avatarName;
-//		this.className = className;
-//		this.avatarLevel = avatarLevel;
-//		this.player = player;
-//	}
+	// public Avatar() {
+	//
+	// }
+	//
+	public Avatar(String avatarName, ClassType className, int avatarLevel) {
+		this.avatarName = avatarName;
+		this.className = className;
+		this.avatarLevel = avatarLevel;
+	}
 }

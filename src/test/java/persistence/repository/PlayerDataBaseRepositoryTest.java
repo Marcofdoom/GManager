@@ -2,6 +2,9 @@ package persistence.repository;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -13,7 +16,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import persistence.domain.Avatar;
 import persistence.domain.Player;
 import util.Constants;
 import util.JSONUtil;
@@ -22,7 +24,7 @@ import util.JSONUtil;
 public class PlayerDataBaseRepositoryTest {
 
 	@InjectMocks // Class under test
-	private AvatarDataBaseRepository avatarDataBaseRepository;
+	private PlayerDataBaseRepository playerDataBaseRepository;
 
 	@Mock // What it requires
 	private EntityManager entityManager;
@@ -34,22 +36,31 @@ public class PlayerDataBaseRepositoryTest {
 
 	@Before
 	public void setup() {
-		avatarDataBaseRepository.setEntityManager(entityManager);
+		playerDataBaseRepository.setEntityManager(entityManager);
 		jsonUtil = new JSONUtil();
-		avatarDataBaseRepository.setJsonUtil(jsonUtil);
+		playerDataBaseRepository.setJsonUtil(jsonUtil);
 	}
 
 	@Test
 	public void getPlayerPassTest() {
-//		Mockito.when(entityManager.find(Player.class, 1))
-//				.thenReturn(jsonUtil.getObjectForJSON(Constants.GET_AVATAR_PASS, Avatar.class));
-//
-//		assertEquals(Constants.GET_AVATAR_PASS, avatarDataBaseRepository.getAvatar("Kilrathi"));
+		Mockito.when(entityManager.find(Player.class, 1))
+				.thenReturn(jsonUtil.getObjectForJSON(Constants.GET_PLAYER_PASS, Player.class));
+
+		assertEquals(Constants.GET_PLAYER_PASS, playerDataBaseRepository.getPlayer(1));
 	}
 
 	@Test
 	public void getPlayerFailTest() {
-		Mockito.when(entityManager.find(Avatar.class, "Kilrathi")).thenReturn(null);
-		assertEquals(Constants.GET_AVATAR_FAIL_RESPONSE, avatarDataBaseRepository.getAvatar("Kilrathi"));
+		Mockito.when(entityManager.find(Player.class, 1)).thenReturn(null);
+		assertEquals(Constants.GET_PLAYER_FAIL_RESPONSE, playerDataBaseRepository.getPlayer(1));
+	}
+
+	@Test
+	public void getAllPlayersTest() {
+		Mockito.when(entityManager.createQuery(Mockito.anyString())).thenReturn(query);
+		List<Player> players = new ArrayList<Player>();
+		players.add(new Player(10, "Marc", "Partington", 0));
+		Mockito.when(query.getResultList()).thenReturn(players);
+		assertEquals(Constants.GET_ALL_PLAYER_QUERY, playerDataBaseRepository.getAllPlayers());
 	}
 }

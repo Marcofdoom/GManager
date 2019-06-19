@@ -6,6 +6,7 @@ public class Constants {
 	public static final String GET_AVATAR_PASS = "{\"avatarName\":\"Kilrathi\",\"className\":\"druid\",\"avatarLevel\":100}";
 	public static final String GET_AVATAR_FAIL_RESPONSE = "{\"message\": \"No Avatar exists\"}";
 
-	public static final String GET_PLAYER_PASS = "{\"playerId\": 10,\"playerFirstName\": \"Marc\",\"playerLastName\": \"Partington\",\"playerDKP\": 0}";
-
+	public static final String GET_ALL_PLAYER_QUERY = "[{\"playerId\":10,\"playerFirstName\":\"Marc\",\"playerLastName\":\"Partington\",\"playerDKP\":0}]";
+	public static final String GET_PLAYER_PASS = "{\"playerId\":10,\"playerFirstName\":\"Marc\",\"playerLastName\":\"Partington\",\"playerDKP\":0}";
+	public static final String GET_PLAYER_FAIL_RESPONSE = "{\"message\": \"No Player exists\"}";
 }
