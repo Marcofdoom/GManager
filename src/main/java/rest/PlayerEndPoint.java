@@ -57,10 +57,10 @@ public class PlayerEndPoint {
 		return null;
 	}
 
-	@Path("/removePlayer/{playerId}")
+	@Path("/deletePlayer/{playerId}")
 	@DELETE
 	@Produces({ "application/json" })
 	public String deletePlayer(@PathParam("playerId") int playerId) {
-		return null;
+		return playerService.deletePlayer(playerId);
 	}
 }

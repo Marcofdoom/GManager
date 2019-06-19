@@ -46,6 +46,6 @@ public class PlayerServiceImpl implements PlayerService {
 
 	@Override
 	public String deletePlayer(int playerId) {
-		return null;
+		return playerRepository.deletePlayer(playerId);
 	}
 }

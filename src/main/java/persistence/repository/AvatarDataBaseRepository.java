@@ -80,7 +80,14 @@ public class AvatarDataBaseRepository implements AvatarRepository {
 	@Transactional(REQUIRED)
 	@Override
 	public String deleteAvatar(String avatarName) {
-		return null;
+		Avatar avatar = entityManager.find(Avatar.class, avatarName);
+
+		if (avatar == null) {
+			return Constants.REMOVE_AVATAR_DOES_NOT_EXIST_RESPONSE;
+		}
+
+		entityManager.remove(avatar);
+		return Constants.REMOVE_AVATAR_PASS_RESPONSE;
 	}
 
 	public void setEntityManager(EntityManager entityManager) {

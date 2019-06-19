@@ -60,10 +60,10 @@ public class AvatarEndPoint {
 		return null;
 	}
 
-	@Path("/removeAvatar/{avatarName}")
+	@Path("/deleteAvatar/{avatarName}")
 	@DELETE
 	@Produces({ "application/json" })
 	public String deleteAvatar(@PathParam("avatarName") String avatarName) {
-		return null;
+		return avatarService.deleteAvatar(avatarName);
 	}
 }

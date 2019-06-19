@@ -76,10 +76,24 @@ public class AvatarDataBaseRepositoryTest {
 	}
 
 	@Test
-	public void addAvatarDoesNotExist() {
+	public void addAvatarDoesNotExistTest() {
 		Mockito.when(entityManager.find(Avatar.class, "Kilrathi")).thenReturn(null);
 
 		assertEquals(Constants.ADD_AVATAR_PASS_RESPONSE,
 				avatarDataBaseRepository.addAvatar(Constants.SINGLE_AVATAR_JSON));
+	}
+
+	@Test
+	public void deleteAvatarDoesNotExistTest() {
+		Mockito.when(entityManager.find(Avatar.class, "Kilrathi")).thenReturn(null);
+		assertEquals(Constants.REMOVE_AVATAR_DOES_NOT_EXIST_RESPONSE,
+				avatarDataBaseRepository.deleteAvatar("Kilrathi"));
+	}
+
+	@Test
+	public void deleteAvatarDoesExistTest() {
+		Mockito.when(entityManager.find(Avatar.class, "Kilrathi"))
+				.thenReturn(new Avatar("Kilrathi", ClassType.druid, 100));
+		assertEquals(Constants.REMOVE_AVATAR_PASS_RESPONSE, avatarDataBaseRepository.deleteAvatar("Kilrathi"));
 	}
 }
