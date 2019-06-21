@@ -8,7 +8,6 @@ import javax.persistence.Id;
 
 import lombok.Data;
 
-@Data
 @Entity
 public class Raid {
 
@@ -19,4 +18,20 @@ public class Raid {
 
 	@Column(name = "raid_name")
 	private String raidName;
+
+	public int getRaidId() {
+		return raidId;
+	}
+
+	public void setRaidId(int raidId) {
+		this.raidId = raidId;
+	}
+
+	public String getRaidName() {
+		return raidName;
+	}
+
+	public void setRaidName(String raidName) {
+		this.raidName = raidName;
+	}
 }

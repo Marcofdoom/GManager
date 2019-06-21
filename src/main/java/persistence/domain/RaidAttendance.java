@@ -8,7 +8,6 @@ import javax.persistence.Id;
 
 import lombok.Data;
 
-@Data
 @Entity
 public class RaidAttendance {
 
@@ -20,6 +19,21 @@ public class RaidAttendance {
 	@Column(name = "instance_date")
 	private int instanceDate;
 
-//	@ManyToMany(fetch = FetchType.EAGER)
-//	private List<Player> players;
+	public int getInstanceId() {
+		return instanceId;
+	}
+
+	public void setInstanceId(int instanceId) {
+		this.instanceId = instanceId;
+	}
+
+	public int getInstanceDate() {
+		return instanceDate;
+	}
+
+	public void setInstanceDate(int instanceDate) {
+		this.instanceDate = instanceDate;
+	}
+	// @ManyToMany(fetch = FetchType.EAGER)
+	// private List<Player> players;
 }
