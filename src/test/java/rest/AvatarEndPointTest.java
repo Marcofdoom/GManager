@@ -23,8 +23,34 @@ public class AvatarEndPointTest {
 
 	@Test
 	public void addAvatar() {
-		Mockito.when(avatarService.addAvatar(Constants.SINGLE_PLAYER_JSON))
+		Mockito.when(avatarService.addAvatar(Constants.SINGLE_AVATAR_JSON))
 				.thenReturn(Constants.ADD_AVATAR_PASS_RESPONSE);
-		assertEquals(Constants.ADD_AVATAR_PASS_RESPONSE, avatarEndPoint.addAvatar(Constants.SINGLE_PLAYER_JSON));
+		assertEquals(Constants.ADD_AVATAR_PASS_RESPONSE, avatarEndPoint.addAvatar(Constants.SINGLE_AVATAR_JSON));
+	}
+
+	@Test
+	public void getAvatarTest() {
+		Mockito.when(avatarService.getAvatar("Kilrathi")).thenReturn(Constants.SINGLE_AVATAR_JSON);
+		assertEquals(Constants.SINGLE_AVATAR_JSON, avatarEndPoint.getAvatar("Kilrathi"));
+	}
+
+	@Test
+	public void updateAvatarTest() {
+		Mockito.when(avatarService.updateAvatar("Kilrathi", Constants.SINGLE_AVATAR_UPDATE_JSON))
+				.thenReturn(Constants.SINGLE_AVATAR_UPDATE_JSON);
+		assertEquals(Constants.SINGLE_AVATAR_UPDATE_JSON,
+				avatarEndPoint.updateAvatar("Kilrathi", Constants.SINGLE_AVATAR_UPDATE_JSON));
+	}
+
+	@Test
+	public void deleteAvatar() {
+		Mockito.when(avatarService.deleteAvatar("Kilrathi")).thenReturn(Constants.REMOVE_AVATAR_PASS_RESPONSE);
+		assertEquals(Constants.REMOVE_AVATAR_PASS_RESPONSE, avatarEndPoint.deleteAvatar("Kilrathi"));
+	}
+
+	@Test
+	public void getAllAvatars() {
+		Mockito.when(avatarService.getAllAvatars()).thenReturn(Constants.GET_ALL_AVATAR_QUERY);
+		assertEquals(Constants.GET_ALL_AVATAR_QUERY, avatarEndPoint.getAllAvatars());
 	}
 }
