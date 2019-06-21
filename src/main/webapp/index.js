@@ -62,6 +62,7 @@ function removeAvatar(id) {
     request.onload = function () {
         let movieArray = JSON.parse(request.response);
         console.log(movieArray);
+        getAllAvatars()
     }
 
     request.open(removeAvatarConst.method, removeAvatarConst.url + id);
@@ -197,5 +198,5 @@ function removeChildren(element_id) {
 
 function removeRow(oButton) {
     removeAvatar(oButton.id);
-    getAllAvatars();
+    // getAllAvatars();
 }
