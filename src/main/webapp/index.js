@@ -1,6 +1,6 @@
 // // Avatar constants
-// const URL = '35.246.104.241:8888';
-const URL = 'localhost:8080';
+const URL = '35.246.167.88:8888';
+// const URL = 'localhost:8080';
 
 const getAllAvatarsConst = { method: "GET", url: `http://${URL}/GManager/api/avatar/getAllAvatars` };
 // const getAvatarConst = { method: "GET", url: "http://localhost:8080/guildmanagertwo/api/avatar/getAvatar/" };
