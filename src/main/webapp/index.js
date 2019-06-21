@@ -59,9 +59,19 @@ function getAllAvatars() {
 
 function removeAvatar(id) {
 
-multi(removeAvatarConst.method, removeAvatarConst.url + id).then(
+console.log(id);
 
-     getAllAvatars()
+multi(removeAvatarConst.method, removeAvatarConst.url + id).then(res => {
+
+console.log(res)
+    //  getAllAvatars()
+    multi("GET",getAllAvatarsConst.url).then(res => {
+    
+    console.log(res)
+    buildTable(JSON.parse(res), "table_body")
+    })
+}
+   
 )
 
 
@@ -232,7 +242,8 @@ function buildTable(array, tableId) {
         let removeButton = document.createElement('button');
         removeButton.id = element.avatarName;
         removeButton.innerText = 'Remove';
-        removeButton.setAttribute('onclick', 'removeRow(this)');
+        removeButton.onclick = removeRow;
+        // removeButton.setAttribute('onclick', 'removeRow()');
         row.appendChild(cell5);
         cell5.appendChild(removeButton);
     });
@@ -245,7 +256,8 @@ function removeChildren(element_id) {
     }
 }
 
-function removeRow(oButton) {
-    removeAvatar(oButton.id);
+function removeRow() {
+    console.log(event.target.id)
+    removeAvatar(event.target.id);
     // getAllAvatars();
 }
