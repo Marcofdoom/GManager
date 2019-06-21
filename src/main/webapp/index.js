@@ -32,7 +32,7 @@ function getAllAvatars() {
     let request = new XMLHttpRequest();
 
     request.onload = function () {
-        movieArray = JSON.parse(request.response);
+        let movieArray = JSON.parse(request.response);
         console.log(movieArray);
         // buildTable(movieArray, "table_body");
     }
