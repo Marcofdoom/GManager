@@ -59,22 +59,18 @@ function getAllAvatars() {
 
 function removeAvatar(id) {
 
-console.log(id);
-
 multi(removeAvatarConst.method, removeAvatarConst.url + id).then(res => {
 
 console.log(res)
     //  getAllAvatars()
-    multi("GET",getAllAvatarsConst.url).then(res => {
+    multi(getAllAvatarsConst.method,getAllAvatarsConst.url).then(res => {
     
-    console.log(res)
-    buildTable(JSON.parse(res), "table_body")
+    // console.log(res)
+    buildTable(JSON.parse(res), "table_body")   
     })
 }
    
 )
-
-
 
     // let request = new XMLHttpRequest();
 
@@ -243,7 +239,6 @@ function buildTable(array, tableId) {
         removeButton.id = element.avatarName;
         removeButton.innerText = 'Remove';
         removeButton.onclick = removeRow;
-        // removeButton.setAttribute('onclick', 'removeRow()');
         row.appendChild(cell5);
         cell5.appendChild(removeButton);
     });
@@ -257,7 +252,6 @@ function removeChildren(element_id) {
 }
 
 function removeRow() {
-    console.log(event.target.id)
     removeAvatar(event.target.id);
     // getAllAvatars();
 }
