@@ -19,37 +19,68 @@
     <script src="index.js"></script>
 </head>
 
-<!-- @Id
-	@Column(name = "avatar_name")
-	private String avatarName;
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Guild Manager</a>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Add Avatar
+    </button>
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "class_name")
-	private ClassType className;
-
-	@Column(name = "avatar_level")
-	private int avatarLevel; -->
-
-<nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-        Guild Manager
-    </a>
-</nav>
-<div>
     <button type="button" class="btn btn-primary" onclick="getAllAvatars()">Get All Avatars</button>
+</nav>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <input type="text" class="form-control" placeholder="Name" aria-label="Name"
+                    aria-describedby="basic-addon1" id="form_avatar_name">
+
+                <label for="exampleFormControlSelect1"></label>
+                <select class="form-control" id="form_class_select">
+                    <option>WARRIOR</option>
+                    <option>DRUID</option>
+                    <option>PRIEST</option>
+                    <option>SHAMAN</option>
+                    <option>PALADIN</option>
+                    <option>HUNTER</option>
+                    <option>ROGUE</option>
+                    <option>MAGE</option>
+                    <option>WARLOCK</option>
+                </select>
+
+                <label for="exampleInputPassword1"></label>
+                <input type="number" class="form-control" id="form_level" placeholder="player id">
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="addAvatar()">Save changes</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div>
     <table class="table">
         <thead>
             <tr>
-                <th>placholder</th>
-                <th>placholder</th>
-                <th>placholder</th>
+                <th>Avatar Name</th>
+                <th>Class Name</th>
+                <th>Avatar Level</th>
+                <th>Update</th>
+                <th>Delete</th>
             </tr>
         </thead>
 
-        <tbody id="table_player">
+        <tbody id="table_body">
         </tbody>
     </table>
 </div>
