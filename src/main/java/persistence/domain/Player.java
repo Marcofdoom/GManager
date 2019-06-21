@@ -8,7 +8,6 @@ import javax.persistence.Id;
 
 import lombok.Data;
 
-@Data
 @Entity
 public class Player {
 
@@ -40,6 +39,38 @@ public class Player {
 		this.playerId = playerId;
 		this.playerFirstName = playerFirstName;
 		this.playerLastName = playerLastName;
+		this.playerDKP = playerDKP;
+	}
+
+	public int getPlayerId() {
+		return playerId;
+	}
+
+	public void setPlayerId(int playerId) {
+		this.playerId = playerId;
+	}
+
+	public String getPlayerFirstName() {
+		return playerFirstName;
+	}
+
+	public void setPlayerFirstName(String playerFirstName) {
+		this.playerFirstName = playerFirstName;
+	}
+
+	public String getPlayerLastName() {
+		return playerLastName;
+	}
+
+	public void setPlayerLastName(String playerLastName) {
+		this.playerLastName = playerLastName;
+	}
+
+	public int getPlayerDKP() {
+		return playerDKP;
+	}
+
+	public void setPlayerDKP(int playerDKP) {
 		this.playerDKP = playerDKP;
 	}
 }
