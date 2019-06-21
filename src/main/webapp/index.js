@@ -55,18 +55,68 @@ function getAllAvatars() {
     // makeRequest(getAllAvatarsConst.method, getAllAvatarsConst.url);
 }
 
+
+
 function removeAvatar(id) {
 
-    let request = new XMLHttpRequest();
+multi(removeAvatarConst.method, removeAvatarConst.url + id).then(
 
-    request.onload = function () {
-        let movieArray = JSON.parse(request.response);
-        console.log(movieArray);
-    }
+     getAllAvatars()
+)
 
-    request.open(removeAvatarConst.method, removeAvatarConst.url + id);
-    request.send();
+
+
+    // let request = new XMLHttpRequest();
+
+    // request.onload = function () {
+    //     let movieArray = JSON.parse(request.response);
+    //     console.log(movieArray);
+       
+    // }
+
+    // request.open(removeAvatarConst.method, removeAvatarConst.url + id);
+    // request.send();
 }
+
+//promises and request
+const multi = (method, url, body) => {
+
+    return new Promise(
+
+        function (res, rej) {
+
+            const req = new XMLHttpRequest();
+
+            req.onload = () => {
+
+                if (req.status === 200) {
+                    res(req.response);
+                } else {
+                    const reason = new Error('Rejected');
+                    rej(reason);
+                }
+
+            }
+
+            req.open(method, url)
+
+            req.send(body);
+
+        }
+    );
+
+}
+
+// var promise = new Promise(function(resolve, reject) {
+//   // do a thing, possibly async, then…
+
+//   if (/* everything turned out fine */) {
+//     resolve("Stuff worked!");
+//   }
+//   else {
+//     reject(Error("It broke"));
+//   }
+// });
 
 function getAvatar() {
     makeRequest(getAvatarConst.method, getAvatarConst.url + document.getElementById('search_bar').value);
@@ -197,5 +247,5 @@ function removeChildren(element_id) {
 
 function removeRow(oButton) {
     removeAvatar(oButton.id);
-    getAllAvatars();
+    // getAllAvatars();
 }
