@@ -26,4 +26,12 @@ public class RaidDataBaseRepository implements RaidRepository {
 	public String addNewRaidRecord() {
 		return null;
 	}
+
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
+
+	public void setJsonUtil(JSONUtil jsonUtil) {
+		this.jsonUtil = jsonUtil;
+	}
 }
