@@ -5,6 +5,7 @@ const URL = '35.246.167.88:8888';
 const getAllAvatarsConst = { method: "GET", url: `http://${URL}/GManager/api/avatar/getAllAvatars` };
 const createAvatarConst = { method: "POST", url: `http://${URL}/GManager/api/avatar/addAvatar` };
 const removeAvatarConst = { method: "DELETE", url: `http://${URL}/GManager/api/avatar/deleteAvatar/` };
+const updateAvatarConst = { method: "PUT", url: `http://${URL}/GManager/api/avatar/updateAvatar/` };
 // const getAvatarConst = { method: "GET", url: "http://localhost:8080/guildmanagertwo/api/avatar/getAvatar/" };
 // const removeAvatarConst = { method: "DELETE", url: "http://localhost:8080/guildmanagertwo/api/avatar/removeAvatar/" };
 // const updateAvatarConst = { method: "PUT", url: "http://localhost:8080/guildmanagertwo/api/avatar/updateAvatar/" };
@@ -19,26 +20,21 @@ const removeAvatarConst = { method: "DELETE", url: `http://${URL}/GManager/api/a
 // Avatar CRUD functions
 // CREATE
 function addAvatar() {
+
     let avatar = {
         avatarName: document.getElementById("form_avatar_name").value,
         className: document.getElementById("form_class_select").value,
         avatarLevel: Number(document.getElementById("form_level").value)
     }
-    console.log(avatar);
-    let request = new XMLHttpRequest();
 
-    request.onload = function () {
-        let movieArray = JSON.parse(request.response);
-        console.log(movieArray);
-    }
-
-    request.open(createAvatarConst.method, createAvatarConst.url);
-    request.send(JSON.stringify(avatar));
-
-    // makeRequest(createAvatarConst.method, createAvatarConst.url, JSON.stringify(avatar));
+    multi(createAvatarConst.method, createAvatarConst.url, JSON.stringify(avatar)).then(res => {
+        console.log(res)
+        multi(getAllAvatarsConst.method, getAllAvatarsConst.url).then(res => {
+            buildTable(JSON.parse(res), "table_body")
+        })
+    })
 }
 
-// READ
 function getAllAvatars() {
 
     let request = new XMLHttpRequest();
@@ -51,48 +47,42 @@ function getAllAvatars() {
 
     request.open(getAllAvatarsConst.method, getAllAvatarsConst.url);
     request.send();
-
-    // makeRequest(getAllAvatarsConst.method, getAllAvatarsConst.url);
 }
-
-
 
 function removeAvatar(id) {
 
-multi(removeAvatarConst.method, removeAvatarConst.url + id).then(res => {
+    multi(removeAvatarConst.method, removeAvatarConst.url + id).then(res => {
 
-console.log(res)
-    //  getAllAvatars()
-    multi(getAllAvatarsConst.method,getAllAvatarsConst.url).then(res => {
-    
-    // console.log(res)
-    buildTable(JSON.parse(res), "table_body")   
+        console.log(res)
+        multi(getAllAvatarsConst.method, getAllAvatarsConst.url).then(res => {
+            buildTable(JSON.parse(res), "table_body")
+        })
+    }
+    )
+}
+
+function updateAvatar() {
+
+    let avatar = {
+        avatarName: document.getElementById("form_avatar_name_update").value,
+        className: document.getElementById("form_class_select_update").value,
+        avatarLevel: Number(document.getElementById("form_level_update").value)
+    }
+
+    console.log(avatar);
+
+    multi(updateAvatarConst.method, updateAvatarConst.url + avatar.avatarName, JSON.stringify(avatar)).then(res => {
+        console.log(res)
+        multi(getAllAvatarsConst.method, getAllAvatarsConst.url).then(res => {
+            buildTable(JSON.parse(res), "table_body")
+        })
     })
 }
-   
-)
 
-    // let request = new XMLHttpRequest();
-
-    // request.onload = function () {
-    //     let movieArray = JSON.parse(request.response);
-    //     console.log(movieArray);
-       
-    // }
-
-    // request.open(removeAvatarConst.method, removeAvatarConst.url + id);
-    // request.send();
-}
-
-//promises and request
 const multi = (method, url, body) => {
-
     return new Promise(
-
         function (res, rej) {
-
             const req = new XMLHttpRequest();
-
             req.onload = () => {
 
                 if (req.status === 200) {
@@ -101,110 +91,17 @@ const multi = (method, url, body) => {
                     const reason = new Error('Rejected');
                     rej(reason);
                 }
-
             }
 
             req.open(method, url)
-
             req.send(body);
-
         }
     );
-
 }
-
-// var promise = new Promise(function(resolve, reject) {
-//   // do a thing, possibly async, then…
-
-//   if (/* everything turned out fine */) {
-//     resolve("Stuff worked!");
-//   }
-//   else {
-//     reject(Error("It broke"));
-//   }
-// });
 
 function getAvatar() {
     makeRequest(getAvatarConst.method, getAvatarConst.url + document.getElementById('search_bar').value);
 }
-
-// // UPDATE
-// function updateAvatar() {
-//     let avatar = {
-//         avatarName: document.getElementById("form_avatar_name").value,
-//         className: document.getElementById("form_class_select").value,
-//         avatarLevel: document.getElementById("form_level").value
-//     }
-
-//     makeRequest(updateAvatarConst.method, updateAvatarConst.url + document.getElementById('search_bar').value, JSON.stringify(avatar));
-// }
-
-// // DELETE
-// function removeAvatar() {
-//     makeRequest(removeAvatarConst.method, removeAvatarConst.url + document.getElementById('search_bar').value);
-// }
-
-// // Player CRUD functions
-// // CREATE
-// function addPlayer() {
-//     let player = {
-//         playerFirstName: document.getElementById("form_player_first_name").value,
-//         playerLastName: document.getElementById("form_player_last_name").value,
-//         playerDKP: document.getElementById("form_player_dkp").value
-//     }
-
-//     makeRequest(createPlayerConst.method, createPlayerConst.url, JSON.stringify(player));
-// }
-
-// // READ
-// function getAllPlayers() {
-//     let request = new XMLHttpRequest();
-
-//     request.onload = function () {
-//         movieArray = JSON.parse(request.response);
-//         console.log(movieArray);
-//         buildTable(movieArray, "table_player");
-//     }
-
-//     request.open(getAllPlayersConst.method, getAllPlayersConst.url);
-//     request.send();
-
-//     // makeRequest(getAllPlayersConst.method, getAllPlayersConst.url);
-// }
-
-// function getPlayer() {
-//     makeRequest(getPlayerConst.method, getPlayerConst.url + document.getElementById('form_avatar_player').value);
-// }
-
-// // UPDATE
-// function updatePlayer() {
-//     let player = {
-//         playerFirstName: document.getElementById("form_player_first_name").value,
-//         playerLastName: document.getElementById("form_player_last_name").value,
-//         playerDKP: document.getElementById("form_player_dkp").value
-//     }
-
-//     makeRequest(updateAvatarConst.method, updateAvatarConst.url + document.getElementById('search_bar').value, JSON.stringify(player));
-// }
-
-// // DELETE
-// function removePlayer() {
-//     makeRequest(removePlayerConst.method, removePlayerConst.url + document.getElementById('form_avatar_player').value);
-// }
-
-// // UTIL
-// function makeRequest(method, url, body) {
-
-//     let request = new XMLHttpRequest();
-
-//     request.onload = function () {
-//         let response = JSON.parse(request.responseText);
-//         console.log(response);
-//     }
-
-//     request.open(method, url);
-//     request.send(body);
-// }
 
 function buildTable(array, tableId) {
 
@@ -212,7 +109,6 @@ function buildTable(array, tableId) {
     let parent = document.getElementById(tableId);
 
     array.forEach(element => {
-        // let name = element.avatarName;
         let row = document.createElement('tr');
         parent.appendChild(row);
 
@@ -230,12 +126,20 @@ function buildTable(array, tableId) {
 
         let cell4 = document.createElement('td');
         let updateButton = document.createElement('button');
+        updateButton.className = "btn btn-secondary";
         updateButton.innerText = 'Update';
+        updateButton.id = element.avatarName + '_update';
+        updateButton.onclick = populateModalUserDetails;
+
+        updateButton.setAttribute("data-toggle", "modal");
+        updateButton.setAttribute("data-target", "#update_modal");
+
         row.appendChild(cell4);
         cell4.appendChild(updateButton);
 
         let cell5 = document.createElement('td');
         let removeButton = document.createElement('button');
+        removeButton.className = "btn btn-secondary";
         removeButton.id = element.avatarName;
         removeButton.innerText = 'Remove';
         removeButton.onclick = removeRow;
@@ -251,7 +155,17 @@ function removeChildren(element_id) {
     }
 }
 
+function populateModalUserDetails() {
+    let updateUserName = event.target.id;
+    console.log(updateUserName);
+    updateUserName = updateUserName.substr(0, updateUserName.indexOf('_'));
+    console.log(updateUserName);
+
+    let updateNameBox = document.getElementById('form_avatar_name_update');
+    updateNameBox.value = updateUserName;
+
+}
+
 function removeRow() {
     removeAvatar(event.target.id);
-    // getAllAvatars();
 }

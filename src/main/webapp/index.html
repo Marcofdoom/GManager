@@ -21,11 +21,14 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Guild Manager</a>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Add Avatar
-    </button>
-
-    <button type="button" class="btn btn-primary" onclick="getAllAvatars()">Get All Avatars</button>
+    <div class="btn-group mr-2">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Add Avatar
+        </button>
+    </div>
+    <div class="btn-group mr-2">
+        <button type="button" class="btn btn-primary" onclick="getAllAvatars()">Get All Avatars</button>
+    </div>
 </nav>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -33,7 +36,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Create Avatar</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -57,12 +60,53 @@
                 </select>
 
                 <label for="exampleInputPassword1"></label>
-                <input type="number" class="form-control" id="form_level" placeholder="player id">
+                <input type="number" class="form-control" id="form_level" placeholder="Level">
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" onclick="addAvatar()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Update -->
+<div class="modal fade" id="update_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update Avatar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <input type="text" class="form-control" placeholder="Name" aria-label="Name"
+                    aria-describedby="basic-addon1" id="form_avatar_name_update" readonly>
+
+                <label for="exampleFormControlSelect1"></label>
+                <select class="form-control" id="form_class_select_update">
+                    <option>WARRIOR</option>
+                    <option>DRUID</option>
+                    <option>PRIEST</option>
+                    <option>SHAMAN</option>
+                    <option>PALADIN</option>
+                    <option>HUNTER</option>
+                    <option>ROGUE</option>
+                    <option>MAGE</option>
+                    <option>WARLOCK</option>
+                </select>
+
+                <label for="exampleInputPassword1"></label>
+                <input type="number" class="form-control" id="form_level_update" placeholder="Level">
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="updateAvatar()">Save changes</button>
             </div>
         </div>
     </div>
@@ -76,7 +120,7 @@
                 <th>Class Name</th>
                 <th>Avatar Level</th>
                 <th>Update</th>
-                <th>Delete</th>
+                <th>Remove</th>
             </tr>
         </thead>
 
