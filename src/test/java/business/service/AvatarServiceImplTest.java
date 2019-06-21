@@ -9,7 +9,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import persistence.repository.AvatarDataBaseRepository;
+import persistence.repository.AvatarRepository;
 import util.Constants;
 import util.JSONUtil;
 
@@ -20,22 +20,42 @@ public class AvatarServiceImplTest {
 	private AvatarServiceImpl avatarServiceImpl;
 
 	@Mock
-	private AvatarDataBaseRepository avatarDataBaseRepository;
+	private AvatarRepository avatarRepository;
 
 	@Mock
 	private JSONUtil JSONUtil;
 
 	@Test
 	public void addAvatarTest() {
-		Mockito.when(avatarDataBaseRepository.addAvatar(Constants.SINGLE_AVATAR_JSON))
-				.thenReturn(Constants.GET_AVATAR_PASS);
-		assertEquals(Constants.GET_AVATAR_PASS, avatarServiceImpl.addAvatar(Constants.SINGLE_AVATAR_JSON));
+		Mockito.when(avatarRepository.addAvatar(Constants.SINGLE_AVATAR_JSON))
+				.thenReturn(Constants.ADD_AVATAR_PASS_RESPONSE);
+		assertEquals(Constants.ADD_AVATAR_PASS_RESPONSE, avatarServiceImpl.addAvatar(Constants.SINGLE_AVATAR_JSON));
+	}
+
+	@Test
+	public void getAvatarTest() {
+		Mockito.when(avatarRepository.getAvatar("Kilrathi")).thenReturn(Constants.SINGLE_AVATAR_JSON);
+		assertEquals(Constants.SINGLE_AVATAR_JSON, avatarServiceImpl.getAvatar("Kilrathi"));
+	}
+
+	@Test
+	public void updateAvatarTest() {
+		Mockito.when(avatarRepository.updateAvatar("Kilrathi", Constants.SINGLE_AVATAR_UPDATE_JSON))
+				.thenReturn(Constants.SINGLE_AVATAR_UPDATE_JSON);
+		assertEquals(Constants.SINGLE_AVATAR_UPDATE_JSON,
+				avatarRepository.updateAvatar("Kilrathi", Constants.SINGLE_AVATAR_UPDATE_JSON));
+	}
+
+	@Test
+	public void deleteAvatar() {
+		Mockito.when(avatarRepository.deleteAvatar("Kilrathi"))
+				.thenReturn(Constants.REMOVE_AVATAR_PASS_RESPONSE);
+		assertEquals(Constants.REMOVE_AVATAR_PASS_RESPONSE, avatarRepository.deleteAvatar("Kilrathi"));
 	}
 
 	@Test
 	public void getAllAvatars() {
-		// return avatarRepository.getAllAvatars();
-		// Mockito.when(avatarDataBaseRepository.getAllAvatars()).thenReturn(Constants.GET_ALL_AVATAR_QUERY);
-		// assertEquals("", "a");
+		Mockito.when(avatarRepository.getAllAvatars()).thenReturn(Constants.GET_ALL_AVATAR_QUERY);
+		assertEquals(Constants.GET_ALL_AVATAR_QUERY, avatarRepository.getAllAvatars());
 	}
 }
