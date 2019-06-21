@@ -1,6 +1,6 @@
 package rest;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,5 +52,20 @@ public class AvatarEndPointTest {
 	public void getAllAvatars() {
 		Mockito.when(avatarService.getAllAvatars()).thenReturn(Constants.GET_ALL_AVATAR_QUERY);
 		assertEquals(Constants.GET_ALL_AVATAR_QUERY, avatarEndPoint.getAllAvatars());
+	}
+
+	@Test
+	public void getAvatarCountTest() {
+		assertTrue(avatarEndPoint.getAvatarCount() == null);
+	}
+
+	@Test
+	public void getNumberAvatarPerPlayerTest() {
+		assertTrue(avatarEndPoint.getNumberAvatarPerPlayer() == null);
+	}
+
+	@Test
+	public void addAvatarTwoParamTest() {
+		assertTrue(avatarEndPoint.addAvatar(1, "") == null);
 	}
 }

@@ -1,6 +1,6 @@
 package rest;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +28,6 @@ public class PlayerEndPointTest {
 		assertEquals(Constants.ADD_PLAYER_PASS_RESPONSE, playerEndPoint.addPlayer(Constants.SINGLE_PLAYER_JSON));
 	}
 
-	// test
 	@Test
 	public void getPlayerTest() {
 		Mockito.when(playerService.getPlayer(10)).thenReturn(Constants.SINGLE_PLAYER_JSON);
@@ -55,4 +54,18 @@ public class PlayerEndPointTest {
 		assertEquals(Constants.GET_ALL_PLAYER_QUERY, playerEndPoint.getAllPlayers());
 	}
 
+	@Test
+	public void getHighestListDKPTest() {
+		assertTrue(playerEndPoint.getAllPlayers() == null);
+	}
+
+	@Test
+	public void getMostPlayedTest() {
+		assertTrue(playerEndPoint.getMostPlayed() == null);
+	}
+
+	@Test
+	public void getLeastPlayedTest() {
+		assertTrue(playerEndPoint.getLeastPlayed() == null);
+	}
 }

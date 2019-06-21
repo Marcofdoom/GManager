@@ -1,6 +1,7 @@
 package persistence.repository;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,5 +98,20 @@ public class PlayerDataBaseRepositoryTest {
 
 		assertEquals(Constants.UPDATE_PLAYER_DOES_NOT_EXIST_RESPONSE,
 				playerDataBaseRepository.updatePlayer(12, Constants.SINGLE_PLAYER_UPDATE_JSON));
+	}
+
+	@Test
+	public void getHighestDKPTest() {
+		assertTrue(playerDataBaseRepository.getHighestListDKP() == null);
+	}
+
+	@Test
+	public void getMostPlayedTest() {
+		assertTrue(playerDataBaseRepository.getMostPlayed() == null);
+	}
+
+	@Test
+	public void getLeastPlayedTest() {
+		assertTrue(playerDataBaseRepository.getLeastPlayed() == null);
 	}
 }

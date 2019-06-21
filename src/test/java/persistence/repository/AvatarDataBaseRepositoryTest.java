@@ -1,6 +1,6 @@
 package persistence.repository;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,5 +112,20 @@ public class AvatarDataBaseRepositoryTest {
 
 		assertEquals(Constants.UPDATE_AVATAR_DOES_NOT_EXIST_RESPONSE,
 				avatarDataBaseRepository.updateAvatar("Kilrathi", Constants.SINGLE_AVATAR_UPDATE_JSON));
+	}
+
+	@Test
+	public void addAvatarTwoParamTest() {
+		assertTrue(avatarDataBaseRepository.addAvatar(1, "") == null);
+	}
+
+	@Test
+	public void getAvatarCountTest() {
+		assertTrue(avatarDataBaseRepository.getAvatarCount() == null);
+	}
+
+	@Test
+	public void getNumberAvatarPerPlayerTest() {
+		assertTrue(avatarDataBaseRepository.getNumberAvatarPerPlayer() == null);
 	}
 }
