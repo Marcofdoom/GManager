@@ -1,8 +1,10 @@
-// // Avatar constants
+// Avatar constants
 const URL = '35.246.167.88:8888';
 // const URL = 'localhost:8080';
 
 const getAllAvatarsConst = { method: "GET", url: `http://${URL}/GManager/api/avatar/getAllAvatars` };
+const createAvatarConst = { method: "POST", url: `http://${URL}/GManager/api/avatar/addAvatar` };
+const removeAvatarConst = { method: "DELETE", url: `http://${URL}/GManager/api/avatar/deleteAvatar/` };
 // const getAvatarConst = { method: "GET", url: "http://localhost:8080/guildmanagertwo/api/avatar/getAvatar/" };
 // const removeAvatarConst = { method: "DELETE", url: "http://localhost:8080/guildmanagertwo/api/avatar/removeAvatar/" };
 // const updateAvatarConst = { method: "PUT", url: "http://localhost:8080/guildmanagertwo/api/avatar/updateAvatar/" };
@@ -14,19 +16,29 @@ const getAllAvatarsConst = { method: "GET", url: `http://${URL}/GManager/api/ava
 // const createPlayerConst = { method: "POST", url: "http://localhost:8080/guildmanagertwo/api/player/addPlayer" };
 // const removePlayerConst = { method: "DELETE", url: "http://localhost:8080/guildmanagertwo/api/player/removePlayer/" };
 
-// // Avatar CRUD functions
-// // CREATE
-// function addAvatar() {
-//     let avatar = {
-//         avatarName: document.getElementById("form_avatar_name").value,
-//         className: document.getElementById("form_class_select").value,
-//         avatarLevel: document.getElementById("form_level").value
-//     }
+// Avatar CRUD functions
+// CREATE
+function addAvatar() {
+    let avatar = {
+        avatarName: document.getElementById("form_avatar_name").value,
+        className: document.getElementById("form_class_select").value,
+        avatarLevel: Number(document.getElementById("form_level").value)
+    }
+    console.log(avatar);
+    let request = new XMLHttpRequest();
 
-//     makeRequest(createAvatarConst.method, createAvatarConst.url, JSON.stringify(avatar));
-// }
+    request.onload = function () {
+        let movieArray = JSON.parse(request.response);
+        console.log(movieArray);
+    }
 
-// // READ
+    request.open(createAvatarConst.method, createAvatarConst.url);
+    request.send(JSON.stringify(avatar));
+
+    // makeRequest(createAvatarConst.method, createAvatarConst.url, JSON.stringify(avatar));
+}
+
+// READ
 function getAllAvatars() {
 
     let request = new XMLHttpRequest();
@@ -34,13 +46,26 @@ function getAllAvatars() {
     request.onload = function () {
         let movieArray = JSON.parse(request.response);
         console.log(movieArray);
-        // buildTable(movieArray, "table_body");
+        buildTable(movieArray, "table_body");
     }
 
     request.open(getAllAvatarsConst.method, getAllAvatarsConst.url);
     request.send();
 
     // makeRequest(getAllAvatarsConst.method, getAllAvatarsConst.url);
+}
+
+function removeAvatar(id) {
+
+    let request = new XMLHttpRequest();
+
+    request.onload = function () {
+        let movieArray = JSON.parse(request.response);
+        console.log(movieArray);
+    }
+
+    request.open(removeAvatarConst.method, removeAvatarConst.url + id);
+    request.send();
 }
 
 function getAvatar() {
@@ -131,6 +156,7 @@ function buildTable(array, tableId) {
     let parent = document.getElementById(tableId);
 
     array.forEach(element => {
+        // let name = element.avatarName;
         let row = document.createElement('tr');
         parent.appendChild(row);
 
@@ -145,19 +171,31 @@ function buildTable(array, tableId) {
         let cell3 = document.createElement('td');
         cell3.innerText = element.avatarLevel;
         row.appendChild(cell3);
+
+        let cell4 = document.createElement('td');
+        let updateButton = document.createElement('button');
+        updateButton.innerText = 'Update';
+        row.appendChild(cell4);
+        cell4.appendChild(updateButton);
+
+        let cell5 = document.createElement('td');
+        let removeButton = document.createElement('button');
+        removeButton.id = element.avatarName;
+        removeButton.innerText = 'Remove';
+        removeButton.setAttribute('onclick', 'removeRow(this)');
+        row.appendChild(cell5);
+        cell5.appendChild(removeButton);
     });
 }
 
-// function populateDescription() {
-//     const x = event.target.id;
+function removeChildren(element_id) {
+    let myNode = document.getElementById(element_id);
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+}
 
-//     let paragraph = document.getElementById('description');
-//     paragraph.innerText = JSON.stringify(movieArray.Search[x], null, 2);
-// }
-
-// function removeChildren(element_id) {
-//     let myNode = document.getElementById(element_id);
-//     while (myNode.firstChild) {
-//         myNode.removeChild(myNode.firstChild);
-//     }
-// }
+function removeRow(oButton) {
+    removeAvatar(oButton.id);
+    getAllAvatars();
+}
