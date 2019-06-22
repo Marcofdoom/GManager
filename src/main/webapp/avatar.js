@@ -1,72 +1,83 @@
-// Avatar constants
+// URL CONSTANTS
 const URL = '35.246.167.88:8888';
 // const URL = 'localhost:8080';
 
+// AVATAR CONSTANTS
 const getAllAvatarsConst = { method: "GET", url: `http://${URL}/GManager/api/avatar/getAllAvatars` };
+const getAvatarConst = { method: "GET", url: `http://${URL}/GManager/api/avatar/getAvatar/` };
 const createAvatarConst = { method: "POST", url: `http://${URL}/GManager/api/avatar/addAvatar` };
 const removeAvatarConst = { method: "DELETE", url: `http://${URL}/GManager/api/avatar/deleteAvatar/` };
 const updateAvatarConst = { method: "PUT", url: `http://${URL}/GManager/api/avatar/updateAvatar/` };
-// const getAvatarConst = { method: "GET", url: "http://localhost:8080/guildmanagertwo/api/avatar/getAvatar/" };
-// const removeAvatarConst = { method: "DELETE", url: "http://localhost:8080/guildmanagertwo/api/avatar/removeAvatar/" };
-// const updateAvatarConst = { method: "PUT", url: "http://localhost:8080/guildmanagertwo/api/avatar/updateAvatar/" };
-// const createAvatarConst = { method: "POST", url: "http://localhost:8080/guildmanagertwo/api/avatar/addAvatar" };
 
-// // Player constants
-// const getAllPlayersConst = { method: "GET", url: "http://localhost:8080/guildmanagertwo/api/player/getAllPlayers" };
-// const getPlayerConst = { method: "GET", url: "http://localhost:8080/guildmanagertwo/api/player/getPlayer/" };
-// const createPlayerConst = { method: "POST", url: "http://localhost:8080/guildmanagertwo/api/player/addPlayer" };
-// const removePlayerConst = { method: "DELETE", url: "http://localhost:8080/guildmanagertwo/api/player/removePlayer/" };
-
-// Avatar CRUD functions
+// AVATAR CRUD FUNCTIONS
 // CREATE
 function addAvatar() {
-
     let avatar = {
         avatarName: document.getElementById("form_avatar_name").value,
         className: document.getElementById("form_class_select").value,
         avatarLevel: Number(document.getElementById("form_level").value)
     }
 
+    if (avatar.avatarName.length == 0) {
+        return;
+    }
+
+    if (avatar.className.length == 0) {
+        return;
+    }
+
     multi(createAvatarConst.method, createAvatarConst.url, JSON.stringify(avatar)).then(res => {
         console.log(res)
         multi(getAllAvatarsConst.method, getAllAvatarsConst.url).then(res => {
-            buildTable(JSON.parse(res), "table_body")
+            buildAvatarTable(JSON.parse(res), "table_avatar_body")
         })
     })
 }
 
+// GET ALL AVATARS
 function getAllAvatars() {
-
     let request = new XMLHttpRequest();
 
     request.onload = function () {
-        let movieArray = JSON.parse(request.response);
-        console.log(movieArray);
-        buildTable(movieArray, "table_body");
+        let avatarArray = JSON.parse(request.response);
+        console.log(avatarArray);
+        buildAvatarTable(avatarArray, "table_avatar_body");
     }
 
     request.open(getAllAvatarsConst.method, getAllAvatarsConst.url);
     request.send();
 }
 
+// REMOVE AVATAR
 function removeAvatar(id) {
-
     multi(removeAvatarConst.method, removeAvatarConst.url + id).then(res => {
 
         console.log(res)
         multi(getAllAvatarsConst.method, getAllAvatarsConst.url).then(res => {
-            buildTable(JSON.parse(res), "table_body")
+            buildAvatarTable(JSON.parse(res), "table_avatar_body")
         })
     }
     )
 }
 
+// UPDATE AVATAR
 function updateAvatar() {
-
     let avatar = {
         avatarName: document.getElementById("form_avatar_name_update").value,
         className: document.getElementById("form_class_select_update").value,
         avatarLevel: Number(document.getElementById("form_level_update").value)
+    }
+
+    if (avatar.avatarName.length == 0) {
+        return;
+    }
+
+    if (avatar.className.length == 0) {
+        return;
+    }
+
+    if (avatar.avatarLevel == 0) {
+        return;
     }
 
     console.log(avatar);
@@ -74,11 +85,12 @@ function updateAvatar() {
     multi(updateAvatarConst.method, updateAvatarConst.url + avatar.avatarName, JSON.stringify(avatar)).then(res => {
         console.log(res)
         multi(getAllAvatarsConst.method, getAllAvatarsConst.url).then(res => {
-            buildTable(JSON.parse(res), "table_body")
+            buildAvatarTable(JSON.parse(res), "table_avatar_body")
         })
     })
 }
 
+// PROMISE
 const multi = (method, url, body) => {
     return new Promise(
         function (res, rej) {
@@ -99,12 +111,8 @@ const multi = (method, url, body) => {
     );
 }
 
-function getAvatar() {
-    makeRequest(getAvatarConst.method, getAvatarConst.url + document.getElementById('search_bar').value);
-}
-
-function buildTable(array, tableId) {
-
+// AVATAR TABLE
+function buildAvatarTable(array, tableId) {
     removeChildren(tableId);
     let parent = document.getElementById(tableId);
 
@@ -129,8 +137,7 @@ function buildTable(array, tableId) {
         updateButton.className = "btn btn-secondary";
         updateButton.innerText = 'Update';
         updateButton.id = element.avatarName + '_update';
-        updateButton.onclick = populateModalUserDetails;
-
+        updateButton.onclick = populateModalAvatarDetails;
         updateButton.setAttribute("data-toggle", "modal");
         updateButton.setAttribute("data-target", "#update_modal");
 
@@ -140,14 +147,15 @@ function buildTable(array, tableId) {
         let cell5 = document.createElement('td');
         let removeButton = document.createElement('button');
         removeButton.className = "btn btn-secondary";
-        removeButton.id = element.avatarName;
+        removeButton.id = element.avatarName + '_remove';
         removeButton.innerText = 'Remove';
-        removeButton.onclick = removeRow;
+        removeButton.onclick = removeAvatarRow;
         row.appendChild(cell5);
         cell5.appendChild(removeButton);
     });
 }
 
+// UTIL FUNCTIONS
 function removeChildren(element_id) {
     let myNode = document.getElementById(element_id);
     while (myNode.firstChild) {
@@ -155,17 +163,27 @@ function removeChildren(element_id) {
     }
 }
 
-function populateModalUserDetails() {
+function populateModalAvatarDetails() {
     let updateUserName = event.target.id;
-    console.log(updateUserName);
     updateUserName = updateUserName.substr(0, updateUserName.indexOf('_'));
-    console.log(updateUserName);
 
-    let updateNameBox = document.getElementById('form_avatar_name_update');
-    updateNameBox.value = updateUserName;
+    let request = new XMLHttpRequest();
 
+    request.onload = function () {
+        let avatarObject = JSON.parse(request.response);
+
+        document.getElementById('form_avatar_name_update').value = avatarObject.avatarName;
+        document.getElementById('form_class_select_update').value = avatarObject.className;
+        document.getElementById('form_level_update').value = avatarObject.avatarLevel;
+    }
+
+    request.open(getAvatarConst.method, getAvatarConst.url + updateUserName);
+    request.send();
 }
 
-function removeRow() {
-    removeAvatar(event.target.id);
+function removeAvatarRow() {
+    let avatar_remove_button_id = event.target.id;
+    avatar_remove_button_id = avatar_remove_button_id.substr(0, avatar_remove_button_id.indexOf('_'));
+
+    removeAvatar(avatar_remove_button_id);
 }
