@@ -5,3 +5,5 @@ target
 .factorypath
 .project
 bin
+.idea
+GManager.iml
