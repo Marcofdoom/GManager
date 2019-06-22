@@ -1,10 +1,8 @@
 package persistence.repository;
 
-import static javax.transaction.Transactional.TxType.REQUIRED;
-import static javax.transaction.Transactional.TxType.SUPPORTS;
-
-import java.util.Collection;
-import java.util.List;
+import persistence.domain.Avatar;
+import util.Constants;
+import util.JSONUtil;
 
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
@@ -13,9 +11,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
-import persistence.domain.Avatar;
-import util.Constants;
-import util.JSONUtil;
+import static javax.transaction.Transactional.TxType.REQUIRED;
+import static javax.transaction.Transactional.TxType.SUPPORTS;
 
 @Transactional(SUPPORTS)
 @Default

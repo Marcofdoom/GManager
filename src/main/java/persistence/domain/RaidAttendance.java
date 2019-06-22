@@ -1,12 +1,6 @@
 package persistence.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-import lombok.Data;
+import javax.persistence.*;
 
 @Entity
 public class RaidAttendance {
@@ -34,6 +28,4 @@ public class RaidAttendance {
 	public void setInstanceDate(int instanceDate) {
 		this.instanceDate = instanceDate;
 	}
-	// @ManyToMany(fetch = FetchType.EAGER)
-	// private List<Player> players;
 }
