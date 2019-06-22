@@ -15,8 +15,8 @@ function removePlayer(id) {
     multi(removePlayerConst.method, removePlayerConst.url + id).then(res => {
 
         console.log(res)
-        multi(getAllPlayersConst.method, getAllPlayersConst.url).then(res => {
-            buildPlayerTable(JSON.parse(res), "table_player_body")
+        multi(getAllPlayersConst.method, getAllPlayersConst.url).then(response => {
+            buildPlayerTable(JSON.parse(response), "table_player_body")
         })
     }
     )
@@ -44,8 +44,8 @@ function updatePlayer() {
 
     multi(updatePlayerConst.method, updatePlayerConst.url + id, JSON.stringify(player)).then(res => {
         console.log(res)
-        multi(getAllPlayersConst.method, getAllPlayersConst.url).then(res => {
-            buildPlayerTable(JSON.parse(res), "table_player_body")
+        multi(getAllPlayersConst.method, getAllPlayersConst.url).then(response => {
+            buildPlayerTable(JSON.parse(response), "table_player_body")
         })
     })
 }
@@ -82,8 +82,8 @@ function addPlayer() {
 
     multi(createPlayerConst.method, createPlayerConst.url, JSON.stringify(player)).then(res => {
         console.log(res)
-        multi(getAllPlayersConst.method, getAllPlayersConst.url).then(res => {
-            buildPlayerTable(JSON.parse(res), "table_player_body")
+        multi(getAllPlayersConst.method, getAllPlayersConst.url).then(response => {
+            buildPlayerTable(JSON.parse(response), "table_player_body")
         })
     })
 }
