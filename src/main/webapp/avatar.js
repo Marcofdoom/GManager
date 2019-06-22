@@ -28,8 +28,8 @@ function addAvatar() {
 
     multi(createAvatarConst.method, createAvatarConst.url, JSON.stringify(avatar)).then(res => {
         console.log(res)
-        multi(getAllAvatarsConst.method, getAllAvatarsConst.url).then(res => {
-            buildAvatarTable(JSON.parse(res), "table_avatar_body")
+        multi(getAllAvatarsConst.method, getAllAvatarsConst.url).then(response => {
+            buildAvatarTable(JSON.parse(response), "table_avatar_body")
         })
     })
 }
@@ -53,8 +53,8 @@ function removeAvatar(id) {
     multi(removeAvatarConst.method, removeAvatarConst.url + id).then(res => {
 
         console.log(res)
-        multi(getAllAvatarsConst.method, getAllAvatarsConst.url).then(res => {
-            buildAvatarTable(JSON.parse(res), "table_avatar_body")
+        multi(getAllAvatarsConst.method, getAllAvatarsConst.url).then(response => {
+            buildAvatarTable(JSON.parse(response), "table_avatar_body")
         })
     }
     )
@@ -84,8 +84,8 @@ function updateAvatar() {
 
     multi(updateAvatarConst.method, updateAvatarConst.url + avatar.avatarName, JSON.stringify(avatar)).then(res => {
         console.log(res)
-        multi(getAllAvatarsConst.method, getAllAvatarsConst.url).then(res => {
-            buildAvatarTable(JSON.parse(res), "table_avatar_body")
+        multi(getAllAvatarsConst.method, getAllAvatarsConst.url).then(response => {
+            buildAvatarTable(JSON.parse(response), "table_avatar_body")
         })
     })
 }
