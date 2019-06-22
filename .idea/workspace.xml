@@ -2,15 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ad47820-98ab-4913-affe-f09ef4278bf6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/persistence/domain/Avatar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/persistence/domain/Avatar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/persistence/domain/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/persistence/domain/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/persistence/domain/Raid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/persistence/domain/Raid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/persistence/domain/RaidAttendance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/persistence/domain/RaidAttendance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/persistence/repository/AvatarDataBaseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/persistence/repository/AvatarDataBaseRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/beans.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/beans.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/avatar.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/avatar.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/player.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/player.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -245,15 +236,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1561228504342</updated>
-      <workItem from="1561228507928" duration="619000" />
+      <workItem from="1561228507928" duration="1219000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="619000" />
+    <option name="totallyTimeSpent" value="1219000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="2062" height="1126" extended-state="6" />
+    <frame x="-7" y="-7" width="2062" height="1126" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Designer" />
